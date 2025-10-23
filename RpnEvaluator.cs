@@ -12,11 +12,18 @@ namespace Labor
         {
             var tokens = rpnExpression.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             var stack = new Stack<double>();
+            string previoustoken = "";
             foreach (var token in tokens)
             {
                 if (double.TryParse(token, out double number))
                 {
                     stack.Push(number);
+                    previoustoken = token;
+                }
+                else if (double.TryParse(token, out double number1))
+                {
+                    stack.Push(-number);
+                    previoustoken = token;
                 }
                 else
                 {
@@ -35,6 +42,7 @@ namespace Labor
                         _ => throw new InvalidOperationException($"Unknown operator: {token}")
                     };
                     stack.Push(result);
+                    previoustoken = token;
                 }
             }
             return stack.Pop();

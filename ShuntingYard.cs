@@ -6,6 +6,7 @@
         {
             var outputQueue = new Queue<string>();
             var operatorStack = new Stack<string>();
+            string previoustoken = "";
             foreach (var token in tokens)
             {
                 if (double.TryParse(token, out _))
@@ -15,6 +16,10 @@
                 else if (token == "(")
                 {
                     operatorStack.Push(token);
+                }
+                else if (token == "-" && previoustoken == "(")
+                {
+                    outputQueue.Enqueue(token);
                 }
                 else if (token == ")")
                 {
@@ -34,6 +39,7 @@
                     }
                     operatorStack.Push(token);
                 }
+                previoustoken = token;
             }
             while (operatorStack.Count > 0)
             {
