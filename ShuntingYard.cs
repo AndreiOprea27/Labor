@@ -8,7 +8,7 @@
             var operatorStack = new Stack<string>();
             foreach (var token in tokens)
             {
-                if (int.TryParse(token, out _))
+                if (double.TryParse(token, out _))
                 {
                     outputQueue.Enqueue(token);
                 }
