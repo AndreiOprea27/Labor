@@ -40,6 +40,7 @@
                     operatorStack.Pop();
                     operatorStack.Push(">>");
                 }
+                else if(token.)
                 else
                 {
                     while (operatorStack.Count > 0 && operatorStack.Peek() != "(" && operatorStack.Peek() != "[" &&

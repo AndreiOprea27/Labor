@@ -37,6 +37,10 @@ namespace Labor
                 {
                     currentToken.Append(c);
                 }
+                else if (char.IsLetter(c))
+                {
+                    tokens.Add(c.ToString());
+                }
                 else
                 {
                     throw new ArgumentException($"Ungültiges Zeichen im Ausdruck: {c}");
