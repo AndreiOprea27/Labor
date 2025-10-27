@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Numerics;
 
 namespace Labor
 {
@@ -13,6 +9,7 @@ namespace Labor
             var tokens = rpnExpression.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             var stack = new Stack<double>();
             string previoustoken = "";
+            double result = 0;
             foreach (var token in tokens)
             {
                 if (double.TryParse(token, out double number))
@@ -39,6 +36,7 @@ namespace Labor
                         "-" => left - right,
                         "*" => left * right,
                         "/" => left / right,
+                        "^" => Power(left, right),
                         _ => throw new InvalidOperationException($"Unknown operator: {token}")
                     };
                     stack.Push(result);
@@ -46,6 +44,16 @@ namespace Labor
                 }
             }
             return stack.Pop();
+        }
+
+        public double Power(double left, double right)
+        {
+            while (right > 0)
+            {
+                left = left * right;
+                right--;
+            }
+            return left;
         }
     }
 }

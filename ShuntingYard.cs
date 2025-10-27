@@ -13,17 +13,17 @@
                 {
                     outputQueue.Enqueue(token);
                 }
-                else if (token == "(")
+                else if (token == "(" || token == "[")
                 {
                     operatorStack.Push(token);
                 }
-                else if (token == "-" && previoustoken == "(")
+                else if (token == "-" && (previoustoken == "(" || previoustoken == "["))
                 {
                     outputQueue.Enqueue(token);
                 }
-                else if (token == ")")
+                else if (token == ")" || token == "]")
                 {
-                    while (operatorStack.Count > 0 && operatorStack.Peek() != "(")
+                    while (operatorStack.Count > 0 && (operatorStack.Peek() != "(" || operatorStack.Peek() == "["))
                     {
                         outputQueue.Enqueue(operatorStack.Pop());
                     }
@@ -31,7 +31,7 @@
                 }
                 else
                 {
-                    while (operatorStack.Count > 0 && operatorStack.Peek() != "(" &&
+                    while (operatorStack.Count > 0 && operatorStack.Peek() != "(" && operatorStack.Peek() != "[" &&
                            (getPrecedence(operatorStack.Peek()) > getPrecedence(token) ||
                             (getPrecedence(operatorStack.Peek()) == getPrecedence(token) && isLeftAssociative(token))))
                     {
