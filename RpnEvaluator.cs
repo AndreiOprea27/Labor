@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace Labor
+﻿namespace Labor
 {
     public class RpnEvaluator
     {
@@ -10,8 +8,14 @@ namespace Labor
             var stack = new Stack<double>();
             string previoustoken = "";
             double result = 0;
+            var alphabet = new Alphabet();
             foreach (var token in tokens)
             {
+                if (alphabet.AlphabetArray.Contains(token))
+                {
+                    Console.WriteLine($"Du verwendest die Variable {token}. Bitte gib sein Wert ein");
+                    token = ;
+                }
                 if (double.TryParse(token, out double number))
                 {
                     stack.Push(number);
