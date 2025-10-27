@@ -29,6 +29,11 @@
                     }
                     operatorStack.Pop();
                 }
+                else if(token == "<" && previoustoken == "<")
+                {
+                    operatorStack.Pop();
+                    operatorStack.Push("<<");
+                }
                 else
                 {
                     while (operatorStack.Count > 0 && operatorStack.Peek() != "(" && operatorStack.Peek() != "[" &&

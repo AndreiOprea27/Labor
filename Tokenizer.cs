@@ -22,7 +22,7 @@ namespace Labor
                         currentToken.Clear();
                     }
                 }
-                else if (IsOperator(c) || c == '^' || c == '(' || c == ')' || c == '[' || c == ']')
+                else if (IsOperator(c) || c == '<' || c == '^' || c == '(' || c == ')' || c == '[' || c == ']')
                 {
                     // Das letzte Zahl Token
                     if (currentToken.Length > 0)
