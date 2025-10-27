@@ -10,6 +10,7 @@ namespace Labor
 
             var tokens = new List<object>();
             var currentToken = new StringBuilder();
+            char previousToken = '0';
 
             foreach (char c in input)
             {
@@ -22,7 +23,7 @@ namespace Labor
                         currentToken.Clear();
                     }
                 }
-                else if (IsOperator(c) || c == '<' || c == '>' || c == '^' || c == '(' || c == ')' || c == '[' || c == ']')
+                else if (IsOperator(c) || c == '(' || c == ')' || c == '[' || c == ']')
                 {
                     // Das letzte Zahl Token
                     if (currentToken.Length > 0)
@@ -39,12 +40,14 @@ namespace Labor
                 }
                 else if (char.IsLetter(c))
                 {
-                    tokens.Add(c.ToString());
+                    if (char.IsDigit(previousToken)) throw new ArgumentException("Ungültige Variablename");
+                    else tokens.Add(c.ToString());
                 }
                 else
                 {
                     throw new ArgumentException($"Ungültiges Zeichen im Ausdruck: {c}");
                 }
+                previousToken = c;
             }
 
             // Das letzte Token addieren, falls vorhanden
@@ -58,7 +61,7 @@ namespace Labor
 
         private static bool IsOperator(char c)
         {
-            return c == '+' || c == '-' || c == '*' || c == '/';
+            return c == '+' || c == '-' || c == '*' || c == '/' || c == '<' || c == '>' || c == '^';
         }
     }
 }

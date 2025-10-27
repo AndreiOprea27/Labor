@@ -42,7 +42,8 @@
                 }
                 else if (Alphabet.AlphabetArray.Contains(token))
                 {
-                    outputQueue.Enqueue(token);
+                    if (double.TryParse(previoustoken, out _)) throw new Exception("Ungültige Eingabe");
+                    else outputQueue.Enqueue(token);
                 }
                 else
                 {

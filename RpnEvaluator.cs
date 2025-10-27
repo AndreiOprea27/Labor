@@ -1,4 +1,6 @@
-﻿namespace Labor
+﻿using Newtonsoft.Json.Linq;
+
+namespace Labor
 {
     public class RpnEvaluator
     {
@@ -89,10 +91,51 @@
             double zahl = double.Parse(Console.ReadLine());
             return zahl;
         }
-        public static void PopTheLetter(Stack<double> stack, string letter, double number)
+        public static double PopTheLetter(string rpn, double nr)
         {
-            if(Alphabet.AlphabetArray.Contains(stack.Peek()))stack.Pop();
-            stack.Push(number);
+            var tokens = rpn.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            var stack = new Stack<double>();
+            string previoustoken = "";
+            double result = 0;
+            foreach (var token in tokens)
+            {
+                if (Alphabet.AlphabetArray.Contains(token))
+                {
+                    stack.Push(nr);
+                    previoustoken = nr.ToString();
+                }
+                else if (double.TryParse(token, out double number))
+                {
+                    stack.Push(number);
+                    previoustoken = token;
+                }
+                else if (double.TryParse(token, out double number1))
+                {
+                    stack.Push(-number);
+                    previoustoken = token;
+                }
+                else
+                {
+                    var right = stack.Pop();
+                    var left = stack.Pop();
+                    if (token == "/" && right == 0)
+                    {
+                        throw new DivideByZeroException("Division durch Null ist nicht erlaubt.");
+                    }
+
+                    if (token == "+") result = left + right;
+                    else if (token == "-") result = left - right;
+                    else if (token == "*") result = left * right;
+                    else if (token == "/") result = left / right;
+                    else if (token == "^") result = Power(left, right);
+                    else if (token == "<<") result = Left(left, right);
+                    else if (token == ">>") result = Right(left, right);
+                    else throw new InvalidOperationException($"Unknown operator: {token}");
+                    stack.Push(result);
+                    previoustoken = token;
+                }
+            }
+            return stack.Pop();
         }
     }
 }
