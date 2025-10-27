@@ -47,7 +47,7 @@ namespace Labor
         public static double Power(double left, double right)
         {
             double result = left;
-            while (right > 0)
+            while (right > 1)
             {
                 result = result * left;
                 right--;
