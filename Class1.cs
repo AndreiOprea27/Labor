@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Labor
 {
-    internal class leer
+    internal class Class1
     {
     }
 }
