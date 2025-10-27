@@ -7,7 +7,6 @@
             var outputQueue = new Queue<string>();
             var operatorStack = new Stack<string>();
             string previoustoken = "";
-            var alphabet = new Alphabet();
             foreach (var token in tokens)
             {
                 if (double.TryParse(token, out _))
@@ -41,7 +40,7 @@
                     operatorStack.Pop();
                     operatorStack.Push(">>");
                 }
-                else if (alphabet.AlphabetArray.Contains(token))
+                else if (Alphabet.AlphabetArray.Contains(token))
                 {
                     outputQueue.Enqueue(token);
                 }

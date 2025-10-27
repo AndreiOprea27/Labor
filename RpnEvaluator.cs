@@ -8,13 +8,11 @@
             var stack = new Stack<double>();
             string previoustoken = "";
             double result = 0;
-            var alphabet = new Alphabet();
             foreach (var token in tokens)
             {
-                if (alphabet.AlphabetArray.Contains(token))
+                if (Alphabet.AlphabetArray.Contains(token))
                 {
-                    Console.WriteLine($"Du verwendest die Variable {token}. Bitte gib sein Wert ein");
-                    double zahl = double.Parse(Console.ReadLine());
+                    double zahl = Letter(token);
                     stack.Push(zahl);
                     previoustoken = zahl.ToString();
                 }
@@ -83,6 +81,18 @@
                 right--;
             }
             return result;
+        }
+
+        public static double Letter(string token)
+        {
+            Console.WriteLine($"Du verwendest die Variable {token}. Bitte gib sein Wert ein");
+            double zahl = double.Parse(Console.ReadLine());
+            return zahl;
+        }
+        public static void PopTheLetter(Stack<double> stack, string letter, double number)
+        {
+            if(Alphabet.AlphabetArray.Contains(stack.Peek()))stack.Pop();
+            stack.Push(number);
         }
     }
 }
