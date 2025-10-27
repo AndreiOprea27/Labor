@@ -30,15 +30,13 @@ namespace Labor
                     {
                         throw new DivideByZeroException("Division durch Null ist nicht erlaubt.");
                     }
-                    double result = token switch
-                    {
-                        "+" => left + right,
-                        "-" => left - right,
-                        "*" => left * right,
-                        "/" => left / right,
-                        "^" => Power(left, right),
-                        _ => throw new InvalidOperationException($"Unknown operator: {token}")
-                    };
+
+                    if (token == "+") result = left + right;
+                    else if (token == "-") result = left - right;
+                    else if (token == "*") result = left * right;
+                    else if (token == "/") result = left / right;
+                    else if (token == "^") result = Power(left, right);
+                    else throw new InvalidOperationException($"Unknown operator: {token}");
                     stack.Push(result);
                     previoustoken = token;
                 }
@@ -46,14 +44,15 @@ namespace Labor
             return stack.Pop();
         }
 
-        public double Power(double left, double right)
+        public static double Power(double left, double right)
         {
+            double result = left;
             while (right > 0)
             {
-                left = left * right;
+                result = result * left;
                 right--;
             }
-            return left;
+            return result;
         }
     }
 }

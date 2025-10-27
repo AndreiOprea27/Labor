@@ -23,7 +23,7 @@
                 }
                 else if (token == ")" || token == "]")
                 {
-                    while (operatorStack.Count > 0 && (operatorStack.Peek() != "(" || operatorStack.Peek() == "["))
+                    while (operatorStack.Count > 0 && (operatorStack.Peek() != "(" || operatorStack.Peek() != "["))
                     {
                         outputQueue.Enqueue(operatorStack.Pop());
                     }
