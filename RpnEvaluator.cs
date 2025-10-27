@@ -37,6 +37,7 @@ namespace Labor
                     else if (token == "/") result = left / right;
                     else if (token == "^") result = Power(left, right);
                     else if (token == "<<") result = Left(left, right);
+                    else if (token == ">>") result = Right(left, right);
                     else throw new InvalidOperationException($"Unknown operator: {token}");
                     stack.Push(result);
                     previoustoken = token;
@@ -59,9 +60,20 @@ namespace Labor
         public static double Left(double left, double right)
         {
             double result = left;
-            while (right > 1)
+            while (right > 0)
             {
                 result = result * 2;
+                right--;
+            }
+            return result;
+        }
+
+        public static double Right(double left, double right)
+        {
+            double result = left;
+            while (right > 0)
+            {
+                result = result / 2;
                 right--;
             }
             return result;

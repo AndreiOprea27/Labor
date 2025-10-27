@@ -29,10 +29,16 @@
                     }
                     operatorStack.Pop();
                 }
-                else if(token == "<" && previoustoken == "<")
+                else if (token == "^") operatorStack.Push(token);
+                else if (token == "<" && previoustoken == "<")
                 {
                     operatorStack.Pop();
                     operatorStack.Push("<<");
+                }
+                else if (token == ">" && previoustoken == ">")
+                {
+                    operatorStack.Pop();
+                    operatorStack.Push(">>");
                 }
                 else
                 {
