@@ -14,9 +14,11 @@
                 if (alphabet.AlphabetArray.Contains(token))
                 {
                     Console.WriteLine($"Du verwendest die Variable {token}. Bitte gib sein Wert ein");
-                    token = ;
+                    double zahl = double.Parse(Console.ReadLine());
+                    stack.Push(zahl);
+                    previoustoken = zahl.ToString();
                 }
-                if (double.TryParse(token, out double number))
+                else if (double.TryParse(token, out double number))
                 {
                     stack.Push(number);
                     previoustoken = token;
