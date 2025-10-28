@@ -8,11 +8,10 @@ namespace Labor
 {
     internal class AstPlotter
     {
-        public void PlotAst(string ast)
+        public static void PlotAst(AstNode node)
         {
-            // Placeholder implementation
-            Console.WriteLine("AST Plot:");
-            Console.WriteLine(ast);
+            AstBuilder.PrintAst(node);
+
         }
     }
 }
