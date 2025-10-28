@@ -59,7 +59,7 @@ namespace Labor
             return tokens;
         }
 
-        private static bool IsOperator(char c)
+        public static bool IsOperator(char c)
         {
             return c == '+' || c == '-' || c == '*' || c == '/' || c == '<' || c == '>' || c == '^';
         }
